@@ -12,6 +12,7 @@
             font-family: 'Inter', '微軟正黑體', sans-serif;
             background-color: #f0f2f5;
             color: #1a202c;
+            padding-top: 68px; /* Offset for fixed header */
         }
         /* 主色調 */
         :root {
@@ -84,7 +85,7 @@
 <body class="bg-gray-100">
 
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <a href="#" data-nav-id="home" class="flex items-center space-x-3">
@@ -133,22 +134,15 @@
             </div>
             <div id="personal-growth-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">學習成效與能力成長</h3>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h4 class="font-bold text-amee-blue mb-2">學習能力雷達圖</h4>
-                        <p class="text-gray-600 text-sm mb-4">此圖表綜合分析本次參與 AMEE 2025 所獲得的知識與技能提升。分數代表在各領域的深化程度（1-5分），5分表示透過多場次深入探討，已達可策略性應用的程度。</p>
-                        <canvas id="knowledgeRadarChart"></canvas>
-                    </div>
-                    <div>
-                         <h4 class="font-bold text-amee-blue mb-2">關鍵成長摘要</h4>
-                         <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
-                             <li><strong>宏觀視野:</strong> 對全球CBME與AI導入醫學教育的宏觀趨勢與挑戰，建立了系統性的理解。</li>
-                             <li><strong>策略思維:</strong> 學習到如何將外部新知（如AMEE洞察）與內部策略（如健康台灣計畫、CBME白皮書）對接，形成可執行的方案。</li>
-                             <li><strong>人文關懷:</strong> 深化了對醫護人員心理韌性、同理心與正念等「軟實力」重要性的認知，並學習到創新的培育方法。</li>
-                             <li><strong>工具應用:</strong> 掌握了如SWOT、變革管理模型、洞察框架等商業分析工具，能更結構化地分析問題與規劃策略。</li>
-                             <li><strong>實務與網絡連結:</strong> 深刻體會到跨院際的非正式交流與標竿學習(Benchmarking)的價值，無論是在知識分享（AI導入經驗）或大型活動的運營管理上，都獲得了寶貴的實務啟發。</li>
-                         </ul>
-                    </div>
+                 <div class="text-gray-700">
+                     <h4 class="font-bold text-amee-blue mb-2">關鍵成長摘要</h4>
+                     <ul class="list-disc list-inside space-y-2 text-sm">
+                         <li><strong>宏觀視野:</strong> 對全球CBME與AI導入醫學教育的宏觀趨勢與挑戰，建立了系統性的理解。</li>
+                         <li><strong>策略思維:</strong> 學習到如何將外部新知（如AMEE洞察）與內部策略（如健康台灣計畫、CBME白皮書）對接，形成可執行的方案。</li>
+                         <li><strong>人文關懷:</strong> 深化了對醫護人員心理韌性、同理心與正念等「軟實力」重要性的認知，並學習到創新的培育方法。</li>
+                         <li><strong>工具應用:</strong> 掌握了如SWOT、變革管理模型、洞察框架等商業分析工具，能更結構化地分析問題與規劃策略。</li>
+                         <li><strong>實務與網絡連結:</strong> 深刻體會到跨院際的非正式交流與標竿學習(Benchmarking)的價值，無論是在知識分享（AI導入經驗）或大型活動的運營管理上，都獲得了寶貴的實務啟發。</li>
+                     </ul>
                 </div>
             </div>
             <div id="insights-framework" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
@@ -180,15 +174,15 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                              <div>
                                 <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
-                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">在會場中與不同醫院的同道（如長庚的醫檢師）自然地接續起關於AI導入的討論，發現大家面臨的挑戰與目標高度一致。</div>
+                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫關於AI的觀察...]</div>
                             </div>
                             <div>
                                 <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
-                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">這意味著單一機構的閉門造車效率有限。一個結構化的跨院學習社群(CoP)能大幅加速最佳實踐的擴散與共同解決問題，創造1+1>2的綜效，對齊「把有用的新知帶回去」的共同目標。</div>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫對奇美的意義...]</div>
                             </div>
                             <div>
                                 <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
-                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">建議教學部主動發起一個「南台灣醫學教育AI應用SIG（特別興趣小組）」，邀請區域內合作醫院的同道，從每季一次的線上分享會開始，將自發的交流制度化。</div>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫具體行動方案...]</div>
                             </div>
                         </div>
                     </div>
@@ -317,7 +311,7 @@
                     },
                     contentCore: {
                         title: "課程內容主軸與內容",
-                        content: `<p class="text-gray-600 mb-2 text-sm">此場次聚焦於「評估」在醫學教育中的多元面向與創新，從能力委員會的組成到評量工具的設計，再到敘事回饋的優化，進行了深入的學術探討。</p><strong class="text-gray-700 text-sm">發表主題:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li><strong>4D1:</strong> 能力委員會(CC)的成員多元性如何影響決策公平性。</li><li><strong>4D2:</strong> 如何設計選擇題(MCQ)以更好地促進臨床推理。</li><li><strong>4D3:</strong> 將EPA應用於已完成訓練的重症醫師，以促進持續專業發展。</li><li><strong>4D4:</strong> 運用「共同調節學習」理論，讓學生參與回饋的撰寫過程以提升品質。</li></ul>`
+                        content: `<p class="text-gray-600 mb-2 text-sm">此場次聚焦於「評估」在醫學教育中的多元面向與創新，從能力委員會的組成到評量工具的設計，再到敘事回饋的優化，進行了深入的學術探討。</p><strong class="text-gray-700 text-sm">發表主題:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li><strong>D1:</strong> 能力委員會(CC)的成員多元性如何影響決策公平性。</li><li><strong>D2:</strong> 如何設計選擇題(MCQ)以更好地促進臨床推理。</li><li><strong>D3:</strong> 將EPA應用於已完成訓練的重症醫師，以促進持續專業發展。</li><li><strong>D4:</strong> 運用「共同調節學習」理論，讓學生參與回饋的撰寫過程以提升品質。</li></ul>`
                     },
                     insight: {
                         title: "課程洞察",
@@ -421,7 +415,7 @@
                 <div id="theme-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">`;
 
             Object.entries(themes).forEach(([themeId, theme]) => {
-                 if (themeId !== 'summary' && theme.icon) {
+                 if (themeId !== 'summary' && themeId !== 'home' && theme.icon) {
                     const themeIconLarge = theme.icon;
                     homepageHTML += `
                         <a href="#" data-nav-id="${themeId}" class="theme-card block p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group" style="background-image: linear-gradient(135deg, white 0%, var(--amee-light-blue) 100%);">
@@ -541,9 +535,11 @@
 
         function populateNavigation() {
             navigationContainer.innerHTML = '';
-             let navHTML = `<a href="#" data-nav-id="home" class="sidebar-btn">首頁總覽</a>`;
+             let navHTML = ``;
              Object.entries(themes).forEach(([themeId, theme]) => {
-                navHTML += `<a href="#" data-nav-id="${themeId}" class="sidebar-btn">${theme.title}</a>`;
+                if (themeId !== 'home') {
+                    navHTML += `<a href="#" data-nav-id="${themeId}" class="sidebar-btn">${theme.title}</a>`;
+                }
              });
             navigationContainer.innerHTML = navHTML;
         }
