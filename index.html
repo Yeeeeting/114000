@@ -33,8 +33,12 @@
          .sidebar-btn.active svg {
             color: white;
         }
-        .takeaway-box {
-            border-left: 4px solid var(--amee-red);
+        .insight-section {
+            border-left: 4px solid var(--amee-blue);
+            background-color: #F0F5FA;
+        }
+        .insight-takeaway {
+             border-left: 4px solid var(--amee-red);
             background-color: #FEF2F2;
         }
     </style>
@@ -49,7 +53,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.43,7.662l-2.828,2.828a1,1,0,0,1-1.414,0l-2.828-2.828" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.57,16.338l2.828-2.828a1,1,0,0,1,1.414,0l2.828,2.828" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.57,16.338l2.828-2.828a1,1,0,0,1-1.414,0l2.828,2.828" />
                     </svg>
                 </div>
                 <h1 class="text-xl font-bold text-amee-blue ml-3">AMEE 2025</h1>
@@ -67,89 +71,91 @@
             <div id="content-display" class="transition-all duration-300">
                 <!-- Course content will be displayed here -->
             </div>
-
-            <!-- Radar Chart Section -->
-            <section id="radar-chart-section" class="mt-12 bg-white p-6 md:p-8 rounded-2xl shadow-md" style="display: none;">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">AMEE 2025 學習能力雷達圖</h3>
-                <p class="text-gray-600 mb-6">此圖表綜合分析本次參與 AMEE 2025 所獲得的知識與技能提升。分數代表在各領域的深化程度（1-5分），5分表示透過多場次深入探討，已達可策略性應用的程度。</p>
-                <div class="max-w-2xl mx-auto">
-                    <canvas id="knowledgeRadarChart"></canvas>
-                </div>
-            </section>
             
             <!-- Summary and Application Section -->
-            <section id="summary-section" class="mt-12 bg-white p-6 md:p-8 rounded-2xl shadow-md" style="display: none;">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">總結與院內應用策略</h3>
-                <div class="space-y-8">
-                    <!-- CBME & EPA -->
-                    <div>
-                        <h4 class="text-xl font-bold text-amee-blue mb-3">1. CBME 與 EPA 的整合應用</h4>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">知識總結</h5>
-                                <p class="text-gray-600">應將 CBME 與 EPA 整合思考，核心目標是釐清臨床工作的關鍵任務，讓評量回歸「信任」與「學習」的本質。應減少無效評量表單，增加基於長期觀察與對話的高品質回饋。</p>
+            <section id="summary-section" class="mt-12" style="display: none;">
+                <div class="space-y-12">
+                    <!-- Section 1: Summarized CBME Strategy -->
+                    <div id="cbme-strategy-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">總結之CBME策略</h3>
+                        <p class="text-gray-600 mb-6">本策略對接本院CBME白皮書，旨在將AMEE 2025的國際趨勢，轉化為具體可執行的跨專業團隊導入方案，以確保教學與臨床服務品質的雙軸提升。</p>
+                        <div class="space-y-6">
+                            <div>
+                                <h5 class="font-bold text-gray-800 mb-2">奇美現況分析（SWOT或是其他分析架構）</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                    <div class="bg-green-50 p-3 rounded"><strong>優勢(S):</strong> 跨院區整合、臨床量能充足、資訊系統成熟、跨職類協作文化。</div>
+                                    <div class="bg-yellow-50 p-3 rounded"><strong>劣勢/缺口(W):</strong> 共通能力模型一致性、評量證據品質與節奏、治理機制與數據整合、師資分級與培育路徑等面向需強化。</div>
+                                    <div class="bg-blue-50 p-3 rounded"><strong>機會(O):</strong> AMEE國際趨勢驗證此方向、健康台灣計畫提供資源、ACGME/CanMEDS等國際框架可供對接。</div>
+                                    <div class="bg-red-50 p-3 rounded"><strong>威脅(T):</strong> 外部評鑑要求日增、智慧醫療快速發展帶來評量與教學模式變革壓力。</div>
+                                </div>
                             </div>
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">院內應用方案</h5>
-                                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                                    <li>推動 CBME 2.0：在高風險臨床活動試行 EPA，簡化評量流程。</li>
-                                    <li>建立回饋文化：舉辦工作坊，訓練臨床教師如何進行有效的觀察與回饋對話。</li>
-                                    <li>務實導入：參考台灣經驗，先由科部或專業學會小規模試行，再逐步擴大。</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- AI in Education -->
-                    <div>
-                        <h4 class="text-xl font-bold text-amee-blue mb-3">2. AI 於醫學教育的策略性導入</h4>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">知識總結</h5>
-                                <p class="text-gray-600">AI 虛擬病人可提供安全的溝通練習環境，尤其適用於標準化或難以安排真人的場景。AI 評量應被視為學習的「起點」，而非終點，用以指引學習方向。</p>
-                            </div>
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">院內應用方案</h5>
-                                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                                    <li>建立 AI 練習室：為住院醫師導入 AI 溝通技巧模擬系統，進行初步演練。</li>
-                                    <li>數據輔助教學：利用 AI 分析學習者的表現，提供個人化的學習建議與資源。</li>
-                                    <li>教師增能：培訓教師如何解讀 AI 評量數據，並將其轉化為有效的教學回饋。</li>
-                                </ul>
+                            <div>
+                                <h5 class="font-bold text-gray-800 mb-2">如何導入或是應用於奇美（什麼導入的理論與框架）</h5>
+                                <p class="text-sm text-gray-600">採用 <strong class="text-amee-blue">科特 (Kotter) 的八步變革法</strong> 作為變革管理框架，並將 <strong class="text-amee-blue">本院CBME白皮書之「四大推動支柱」</strong> 作為具體行動方案的核心，確保策略的連貫性與執行力。</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Resilience & Well-being -->
-                    <div>
-                        <h4 class="text-xl font-bold text-amee-blue mb-3">3. 建立團隊韌性與支持系統</h4>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">知識總結</h5>
-                                <p class="text-gray-600">正視「冒名頂替症候群」等內心壓力，是建立韌性的第一步。創造心理安全的環境至關重要。睡眠與運動是低成本、高效益的基礎建設。</p>
+
+                    <!-- Section 2: Personal Growth and Insights -->
+                    <div id="personal-growth-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">個人洞察</h3>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h4 class="font-bold text-amee-blue mb-2">學習能力雷達圖</h4>
+                                <p class="text-gray-600 text-sm mb-4">此圖表綜合分析本次參與 AMEE 2025 所獲得的知識與技能提升。分數代表在各領域的深化程度（1-5分），5分表示透過多場次深入探討，已達可策略性應用的程度。</p>
+                                <canvas id="knowledgeRadarChart"></canvas>
                             </div>
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">院內應用方案</h5>
-                                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                                    <li>推動「安心說」活動：定期舉辦非正式座談，讓成員分享工作中的不安與挑戰。</li>
-                                    <li>導師制度優化：在導師訓練中加入心理安全與積極傾聽的元素。</li>
-                                    <li>發起健康挑戰：鼓勵科室間進行睡眠、步數等健康促進競賽，營造正向氛圍。</li>
-                                </ul>
+                            <div>
+                                 <h4 class="font-bold text-amee-blue mb-2">關鍵成長摘要</h4>
+                                 <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
+                                     <li><strong>宏觀視野:</strong> 對全球CBME與AI導入醫學教育的宏觀趨勢與挑戰，建立了系統性的理解。</li>
+                                     <li><strong>策略思維:</strong> 學習到如何將外部新知（如AMEE洞察）與內部策略（如健康台灣計畫、CBME白皮書）對接，形成可執行的方案。</li>
+                                     <li><strong>人文關懷:</strong> 深化了對醫護人員心理韌性、同理心與正念等「軟實力」重要性的認知，並學習到創新的培育方法。</li>
+                                     <li><strong>工具應用:</strong> 掌握了如SWOT、變革管理模型、洞察框架等商業分析工具，能更結構化地分析問題與規劃策略。</li>
+                                     <li><strong>實務與網絡連結:</strong> 深刻體會到跨院際的非正式交流與標竿學習(Benchmarking)的價值，無論是在知識分享（AI導入經驗）或大型活動的運營管理上，都獲得了寶貴的實務啟發。</li>
+                                 </ul>
                             </div>
                         </div>
                     </div>
-                     <!-- Empathy & Mindfulness -->
-                     <div>
-                        <h4 class="text-xl font-bold text-amee-blue mb-3">4. 深化同理心與正念文化</h4>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">知識總結</h5>
-                                <p class="text-gray-600">「帶梯子下井」的比喻，精準定義了專業的同理心。Fringe 活動啟示，嚴肅的主題可用創意方式傳達，而正念呼吸是隨時可用的「重置鍵」。</p>
+
+                    <!-- Section 3: Insights Framework -->
+                    <div id="insights-framework" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
+                        <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">洞察與行動框架 (What / So What / Now What)</h3>
+                        <p class="text-gray-600 mb-6">為將學習效益最大化，建議使用以下框架，將會議中的觀察轉化為具體的行動方案。請在此處填寫您的洞察：</p>
+                        <div class="space-y-6">
+                            <!-- Insight 1: Cross-Hospital Collaboration -->
+                            <div class="border border-gray-200 rounded-lg p-4 transition-shadow hover:shadow-md">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                        <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">在會場中與不同醫院的同道（如長庚的醫檢師）自然地接續起關於AI導入的討論，發現大家面臨的挑戰與目標高度一致。</div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">這意味著單一機構的閉門造車效率有限。一個結構化的跨院學習社群(CoP)能大幅加速最佳實踐的擴散與共同解決問題，創造1+1>2的綜效，對齊「把有用的新知帶回去」的共同目標。</div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">建議教學部主動發起一個「南台灣醫學教育AI應用SIG（特別興趣小組）」，邀請區域內合作醫院的同道，從每季一次的線上分享會開始，將自發的交流制度化。</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="bg-amee-light-blue p-5 rounded-lg">
-                                <h5 class="font-semibold text-gray-800 mb-2">院內應用方案</h5>
-                                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                                    <li>引入「同理心工具語言」：將「帶梯子」等具象化比喻納入溝通課程。</li>
-                                    <li>會議開場儀式：在會議或晨會開始前，由主席帶領一分鐘的正念呼吸。</li>
-                                    <li>創意教學注入：鼓勵在教學活動中嘗試 Fringe 風格的短講或互動，提升參與感。</li>
-                                </ul>
+                             <!-- Insight 2: User-Centric Event Management -->
+                            <div class="border border-gray-200 rounded-lg p-4 transition-shadow hover:shadow-md">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                        <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">AMEE主辦方透過其行動app提供即時議程、地圖與推播通知，並在實體場域細心規劃動線、無障礙空間、多元餐飲與安靜區，展現了卓越的運營管理能力。</div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">這證明了「學習者體驗」不僅來自課程內容，更來自無摩擦的後勤支援。優化後勤能降低學員的認知負荷，使其能更專注於學習本身。這為本院舉辦大型訓練活動（如新進人員訓練）樹立了新的標竿。</div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">建議成立一個跨部門的「院內學習活動體驗優化小組」，盤點現有大型訓練活動的流程，並依據AMEE的標竿，建立一份「奇美學習活動體驗檢核表」，從下一次的新進人員訓練開始試行。</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,125 +165,176 @@
     </div>
 
     <script>
+        const themes = {
+            'cbme': { title: 'CBME 策略與評估', courses: ['2W', '4D', '7B'] },
+            'ai': { title: 'AI 於醫學教育之應用', courses: ['4G'] },
+            'resilience': { title: '韌性與人文關懷', courses: ['6J'] },
+            'fringe': { title: 'Fringe 創新活動', courses: ['5E'] }
+        };
+
         const courseData = {
             '2W': {
                 title: '工作坊: 在南半球國家實施 EPA 的挑戰與策略',
                 type: 'Workshop',
-                presenters: ['Gustavo Salata Romao', 'Olle ten Cate', 'Marije Hennus', 'Leila Niemi-Murola', 'Juliana Sa', 'Roberta Ladenheim'],
-                content: `
-                    <h4 class="text-lg font-semibold text-gray-700 mb-2">背景</h4>
-                    <p class="text-gray-600 mb-4">EPAs (Entrustable Professional Activities) 是一套專業活動，用於指導培訓和評估受訓者是否準備好進行獨立的臨床實踐，為學習者和患者提供安全的環境。在許多南半球國家，醫學教育的目標是為初級保健中的獨立臨床實踐做準備，這與北半球國家不同。因此，這些國家在發展和實施研究生 EPAs 時必須遵循不同的路徑。</p>
-                    <h4 class="text-lg font-semibold text-gray-700 mb-2">工作坊結構</h4>
-                    <ul class="list-disc list-inside text-gray-600 space-y-2">
-                        <li>開場與問卷調查 (10 分鐘)</li>
-                        <li>三位講者分享南北半球 PGME 的對比、發展 EPAs 及實施技巧 (15 分鐘)</li>
-                        <li>小組討論 (30 分鐘)</li>
-                        <li>全體會議與成果總結 (20 分鐘)</li>
-                        <li>問答與結論 (15 分鐘)</li>
-                    </ul>`,
-                takeaway: `
-                    <p class="text-gray-700">這場工作坊最大的啟發是，不同國家的經驗讓我們重新思考評量的本質。重點在於減少無效的評量，增加有品質的回饋。信任的建立應基於長期的觀察、病例討論和實際回饋對話等多方面的證據，而不僅僅是一張評量表的結果。</p>`
+                insightData: {
+                    speakers: {
+                        title: "課程講者介紹",
+                        content: `<ul class="list-disc list-inside text-gray-600 text-sm"><li><strong>Gustavo Salata Romao:</strong> University of Ribeirão Preto, 巴西</li><li><strong>Olle ten Cate:</strong> UMC Utrecht / University of California, San Francisco, 荷蘭/美國 (EPA領域權威)</li><li>以及來自荷蘭、芬蘭、葡萄牙、阿根廷的專家學者，共同探討全球南方國家的在地化實踐。</li></ul>`
+                    },
+                    contentCore: {
+                        title: "課程內容主軸與內容",
+                        content: `<p class="text-gray-600 mb-2 text-sm">本工作坊的核心在於探討將源於北半球的 EPA (Entrustable Professional Activities) 概念，應用於南半球國家時所面臨的獨特挑戰與策略。</p><strong class="text-gray-700 text-sm">主要議題:</strong><ul class="list-decimal list-inside text-gray-600 mt-1 text-sm"><li>南北半球在PGME訓練目標與結構上的根本差異。</li><li>在地化發展 EPA 的框架與實務技巧。</li><li>透過小組討論，分享各國在 EPA 導入過程中的挑戰、初步成果與未來方向。</li></ul>`
+                    },
+                    insight: {
+                        title: "課程洞察",
+                        content: `<p class="text-gray-700 text-sm">這場工作坊最大的啟發是，不同國家的經驗讓我們重新思考評量的本質。重點在於減少無效的評量，增加有品質的回饋。信任的建立應基於長期的觀察、病例討論和實際回饋對話等多方面的證據，而不僅僅是一張評量表的結果。</p>`
+                    }
+                }
             },
             '4D': {
                 title: '研究論文: 評估 (二)',
                 type: 'Research Papers',
-                moderator: 'Damien Castanelli',
-                presentations: [
-                    { id: '4D1', title: '探討住院醫師培訓計畫中能力委員會成員多元性與程序', presenter: 'Susan Humphrey-Murto' },
-                    { id: '4D2', title: '測驗增強學習中的反應過程有效性：設計與臨床推理一致的選擇題', presenter: 'Sally Binks' },
-                    { id: '4D3', title: '為受訓的重症監護醫師設計的 EPA：透過基於能力的持續教育達到卓越', presenter: 'Felipe Barros' },
-                    { id: '4D4', title: '利用共同調節學習的兩步驟流程優化醫學生的敘事回饋', presenter: 'Kelsey Miller' }
-                ],
-                takeaway: `
-                    <p class="text-gray-700">研究發表將宏觀概念轉化為可操作的方案。其中一個關於同理心的比喻讓我印象深刻：真正的同理，不是陪著對方一起掉進情緒的井裡，而是帶著梯子下去幫他。這種說法很貼近臨床工作的節奏，能直接應用於新進人員的入職訓練和關懷機制中。</p>`
+                insightData: {
+                     speakers: {
+                        title: "課程講者介紹",
+                        content: `<p class="text-gray-600 text-sm">本場次由 <strong>Damien Castanelli</strong> 主持，匯集了來自加拿大渥太華大學、多倫多大學、美國哈佛醫學院、貝勒醫學院及巴西愛因斯坦醫院的研究者，針對 CBME 中的評估議題提出最新的研究成果。</p>`
+                    },
+                    contentCore: {
+                        title: "課程內容主軸與內容",
+                        content: `<p class="text-gray-600 mb-2 text-sm">此場次聚焦於「評估」在醫學教育中的多元面向與創新，從能力委員會的組成到評量工具的設計，再到敘事回饋的優化，進行了深入的學術探討。</p><strong class="text-gray-700 text-sm">發表主題:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li><strong>4D1:</strong> 能力委員會(CC)的成員多元性如何影響決策公平性。</li><li><strong>4D2:</strong> 如何設計選擇題(MCQ)以更好地促進臨床推理。</li><li><strong>4D3:</strong> 將EPA應用於已完成訓練的重症醫師，以促進持續專業發展。</li><li><strong>4D4:</strong> 運用「共同調節學習」理論，讓學生參與回饋的撰寫過程以提升品質。</li></ul>`
+                    },
+                    insight: {
+                        title: "課程洞察",
+                        content: `<p class="text-gray-700 text-sm">研究發表將宏觀概念轉化為可操作的方案。其中一個關於同理心的比喻讓我印象深刻：真正的同理，不是陪著對方一起掉進情緒的井裡，而是帶著梯子下去幫他。這種說法很貼近臨床工作的節奏，能直接應用於新進人員的入職訓練和關懷機制中。</p>`
+                    }
+                }
             },
-            '4G': {
+             '4G': {
                 title: '短篇報告: 人工智慧於醫學教育之應用',
                 type: 'Short Communications',
-                presentations: [
-                    { id: '4G1', title: '實施 AI 驅動的虛擬病人於溝通技巧訓練：先導準備', presenter: 'Silas Taylor' },
-                    { id: '4G2', title: '透過交叉研究將 AI 整合到 debriefing 課程中', presenter: 'Jui-Yuan Chung, Yu Chang' },
-                    { id: '4G3', title: '評估大型語言模型在 OSCE 評估中的潛力', presenter: 'Prapaporn Suprasert' },
-                    { id: '4G4', title: '利用機器學習為 PGY 評估提供個人化績效報告與職涯建議', presenter: 'Yang Ching Chen' },
-                    { id: '4G5', title: '模擬醫病對話：使用 ChatGPT 支援醫學培訓', presenter: 'Arpita Saggar' },
-                    { id: '4G6', title: 'ChatGPT 能評估非語言同理心嗎？', presenter: 'CHE-WEI LIN' }
-                ],
-                takeaway: `
-                     <p class="text-gray-700">e-poster 中提到一種能模擬多人互動的AI臨床練習系統，提供了一個創新的練習場域。雖然AI有時應對較為制式，但在找不到真人練習時，它能幫助熟悉溝通流程。關鍵在於，AI評量不應被視為最終分數，而是一個起點，提醒學習者下一步該往哪裡努力。</p>`
+                insightData: {
+                     speakers: {
+                        title: "課程講者介紹",
+                        content: `<p class="text-gray-600 text-sm">此場次匯集了來自澳洲、台灣、泰國、英國等地的學者，分享各機構將AI技術（特別是大型語言模型LLM）應用於醫學教育的初步成果與挑戰，講者背景涵蓋臨床醫師與資訊科學家。</p>`
+                    },
+                    contentCore: {
+                        title: "課程內容主軸與內容",
+                        content: `<p class="text-gray-600 mb-2 text-sm">核心主軸為探討 AI 在解決傳統醫學教育痛點（如：練習機會有限、評量耗時、回饋不一致）方面的潛力與現況。</p><strong class="text-gray-700 text-sm">應用場景:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li><strong>溝通技巧:</strong> 運用AI虛擬病人進行對話練習。</li><li><strong>Debriefing:</strong> AI輔助教學回顧，提升效率與信心。</li><li><strong>OSCE評量:</strong> LLM輔助評分，提升一致性與擴展性。</li><li><strong>非語言辨識:</strong> 探討ChatGPT評估非語言同理心的能力極限。</li></ul>`
+                    },
+                    insight: {
+                        title: "課程洞察",
+                        content: `<p class="text-gray-700 text-sm">e-poster 中提到一種能模擬多人互動的AI臨床練習系統，提供了一個創新的練習場域。雖然AI有時應對較為制式，但在找不到真人練習時，它能幫助熟悉溝通流程。關鍵在於，AI評量不應被視為最終分數，而是一個起點，提醒學習者下一步該往哪裡努力。</p>`
+                    }
+                }
             },
             '5E': {
                 title: 'AMEE Fringe 活動',
                 type: 'Fringe Session',
-                moderator: 'Anne de la Croix',
-                presentations: [
-                    { id: '5E01', title: 'OSCE 前的平靜：將正念呼吸帶入教與學環境', presenter: 'Helen Chang' },
-                    { id: '5E02', title: '如何讓評分規準進入你的海馬迴？', presenter: 'Jolanda Schieving' },
-                    { id: '5E03', title: '彎曲不折斷：生活與皮拉提斯的平衡之術', presenter: 'Joyee Vachani' },
-                    { id: '5E04', title: '臨床醫生與病患的受傷療癒者', presenter: 'Louise Younie' },
-                    { id: '5E05', title: '醫學中的旋律', presenter: 'Jacqueline Jin' },
-                    { id: '5E06', title: '醫學與寶萊塢的「舞蹈發現」', presenter: 'Shefali Acra' }
-                ],
-                takeaway: `
-                     <p class="text-gray-700">Fringe 活動是此行的一大亮點。講者們將正念、皮拉提斯、評估量表等主題轉化為極富創意的表演，例如用脫口秀來呈現評估量表。活動最後帶領全場進行伸展與正念呼吸，提醒我們帶著清晰而不急躁的步伐回到工作崗位，並將這些可行的想法變成日常習慣。</p>`
+                insightData: {
+                     speakers: {
+                        title: "課程講者介紹",
+                        content: `<p class="text-gray-600 text-sm">Fringe活動的講者陣容極具多元性，由阿姆斯特丹自由大學的 <strong>Anne de la Croix</strong> 教授主持，講者包括家醫科醫師、兒科醫師、醫學生及教發專家，他們將個人專長與熱情（如正念、皮拉提斯、音樂、舞蹈）融入醫學教育中。</p>`
+                    },
+                    contentCore: {
+                        title: "課程內容主軸與內容",
+                        content: `<p class="text-gray-600 mb-2 text-sm">此活動旨在打破傳統醫學教育的框架，透過極富創意的展演形式，探索醫學與人文、藝術、身心健康的交集。Fringe 強調體驗與互動，鼓勵與會者跳脫舒適圈，從不同角度思考「療癒」與「學習」。</p><strong class="text-gray-700 text-sm">活動亮點:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li>將正念呼吸應用於緩解 OSCE 前的焦慮。</li><li>以詼諧短劇呈現評估量表(Rubrics)の正確使用時機。</li><li>透過皮拉提斯探討身心平衡，以及用詩歌、音樂、寶萊塢舞蹈表達臨床經驗。</li></ul>`
+                    },
+                    insight: {
+                        title: "課程洞察",
+                        content: `<p class="text-gray-700 text-sm">Fringe 活動是此行の一大亮點。講者們將正念、皮拉提斯、評估量表等主題轉化為極富創意的表演，例如用脫口秀來呈現評估量表。活動最後帶領全場進行伸展與正念呼吸，提醒我們帶著清晰而不急躁的步伐回到工作崗位，並將這些可行的想法變成日常習慣。</p>`
+                    }
+                }
             },
             '6J': {
                 title: '短篇報告: 韌性 (Resilience)',
                 type: 'Short Communications',
-                moderator: 'Eeva Pyorala',
-                presentations: [
-                    { id: '6J01', title: '房間裡的冒牌者：承認與理解醫學生的冒名頂替症候群', presenter: 'Jacqueline O\'Dowd' },
-                    { id: '6J02', title: 'Monash 慈悲訓練計畫：有效增加慈悲心並減少醫學生職業倦怠', presenter: 'Kate Owen' },
-                    { id: '6J03', title: '入學時的毅力與醫學生成績呈正相關', presenter: 'Kumiko Yamaguchi' },
-                    { id: '6J04', title: '韌性作為醫學生對抗職業倦怠的關鍵保護因子', presenter: 'Supanun Janeteerawong' },
-                    { id: '6J05', 'title': '正向心理學干預對台灣 ICU 護理師韌性與職業倦怠的有效性', presenter: 'Hui-Hsin Huang' },
-                    { id: '6J06', title: '「韌性」概念的起源與奧德賽：概念分析視角', presenter: 'Najoua Amélia Laajab' }
-                ],
-                takeaway: `
-                    <p class="text-gray-700">關於「自我懷疑」的分享讓我深有同感。講者與資深醫師們坦誠說出自己的不安，讓這種普遍的心情能被正視。這啟發我在指導後進時，應先創造一個安全的環境，再談方法和資源，讓壓力找到健康的出口。此外，數據再次提醒我們睡眠和運動的重要性，這是我們可以立即帶回團隊，提升大家身心狀態的好方法。</p>`
+                insightData: {
+                     speakers: {
+                        title: "課程講者介紹",
+                        content: `<p class="text-gray-600 text-sm">由 <strong>Eeva Pyorala</strong> 主持，講者來自英國、澳洲、日本、泰國、台灣、瑞典等地，從不同文化與教育階段（從入學新生到ICU護理師）の視角，探討醫護人員「韌性」的成因、挑戰與培養策略。</p>`
+                    },
+                    contentCore: {
+                        title: "課程內容主軸與內容",
+                        content: `<p class="text-gray-600 mb-2 text-sm">本場次聚焦於醫護人員在高壓環境下的核心素質—「韌性」。內容涵蓋了對韌性此一概念的根本性分析，以及多項實證研究，探討影響韌性的各種內外在因素。</p><strong class="text-gray-700 text-sm">探討面向:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li><strong>內在挑戰:</strong> 深入探討「冒名頂替症候群」對醫學生的影響。</li><li><strong>保護因子:</strong> 驗證慈悲心、毅力(Grit)、睡眠與運動對抗職業倦怠的保護效果。</li><li><strong>介入措施:</strong> 評估正向心理學與慈悲心訓練計畫的成效。</li></ul>`
+                    },
+                    insight: {
+                        title: "課程洞察",
+                        content: `<p class="text-gray-700 text-sm">關於「自我懷疑」的分享讓我深有同感。講者與資深醫師們坦誠說出自己的不安，讓這種普遍的心情能被正視。這啟發我在指導後進時，應先創造一個安全的環境，再談方法和資源，讓壓力找到健康的出口。此外，數據再次提醒我們睡眠和運動的重要性，這是我們可以立即帶回團隊，提升大家身心狀態的好方法。</p>`
+                    }
+                }
             },
             '7B': {
                 title: '研討會: 從全球各國國家級計畫中獲得的 CBME 洞見',
                 type: 'Symposium',
-                presenters: ['Glen Bandiera', 'Damon Dagnone', 'Lorena Cifuentes', 'Fedde Scheele', 'Lisa Howley', 'Fremen Chou'],
-                content: `
-                    <h4 class="text-lg font-semibold text-gray-700 mb-2">背景</h4>
-                    <p class="text-gray-600 mb-4">基於能力的醫學教育 (CBME) 在全球範圍內獲得了顯著的發展動力。本研討會將探討五個處於不同 CBME 發展階段的國家—加拿大、美國、台灣、智利、荷蘭—的框架，突顯關鍵經驗、成功的實施策略以及持續成長的領域。</p>
-                    <h4 class="text-lg font-semibold text-gray-700 mb-2">重要性</h4>
-                    <p class="text-gray-600 mb-4">醫療品質和健康結果是全球性議題，需要對統一能力框架進行國際性討論。分享跨國家的見解可以促進對最佳實踐和潛在陷阱的更深層次理解。</p>
-                     <h4 class="text-lg font-semibold text-gray-700 mb-2">核心訊息</h4>
-                    <ul class="list-disc list-inside text-gray-600 space-y-2">
-                        <li>能力框架對於使醫生能夠滿足不斷變化的社會期望至關重要。</li>
-                        <li>儘管存在背景差異，但在世界範圍內推動國家級 CBME 計畫是可能的。</li>
-                        <li>各國可以透過全球合作，應對 21 世紀的醫療挑戰。</li>
-                    </ul>`,
-                takeaway: `
-                    <p class="text-gray-700">最大的收穫是確認了 (CBME) 以能力為本的訓練與 (EPA) 任務託付應結合思考。共同目標是釐清臨床工作的核心任務，讓評量回歸「信任」與「學習」。台灣的經驗顯示，由專業學會先行，政策再跟上，是務實的作法。這讓我更清楚，我們的焦點應是減少無效評量，增加有品質的回饋。</p>`
+                insightData: {
+                     speakers: {
+                        title: "課程講者介紹",
+                        content: `<p class="text-gray-600 text-sm">此為一高層次對談，由加拿大皇家內科與外科醫師學院(Royal College)的 <strong>Glen Bandiera</strong> 教授領軍，匯集了來自加拿大、美國(AAMC, ACGME)、台灣(臺北醫學大學)、智利、荷蘭等國家級醫學教育機構的代表，分享各國推動CBME的宏觀策略與經驗。</p>`
+                    },
+                    contentCore: {
+                        title: "課程內容主軸與內容",
+                        content: `<p class="text-gray-600 mb-2 text-sm">本研討會從國家級的宏觀視角，比較了五個處於不同CBME發展階段的國家，如何將CanMEDS等能力框架進行在地化調適，並推展至全國的醫學教育體系中。</p><strong class="text-gray-700 text-sm">核心議題:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li>各國在能力框架的「在地化調適」與「全新發展」之間的決策考量。</li><li>推動全國性變革時面臨的挑戰，如：資源分配、教師抗性、評量系統改革。</li><li>對於未來醫師能力需求的預測，以及如何透過全球合作應對21世紀的醫療挑戰。</li></ul>`
+                    },
+                    insight: {
+                        title: "課程洞察",
+                        content: `<p class="text-gray-700 text-sm">最大的收穫是確認了 (CBME) 以能力為本的訓練與 (EPA) 任務託付應結合思考。共同目標是釐清臨床工作的核心任務，讓評量回歸「信任」與「學習」。台灣的經驗顯示，由專業學會先行，政策再跟上，是務實的作法。這讓我更清楚，我們的焦點應是減少無效評量，增加有品質的回饋。</p>`
+                    }
+                }
             }
         };
 
         const navigationContainer = document.getElementById('course-navigation');
         const contentDisplay = document.getElementById('content-display');
         const header = document.querySelector('header');
+        let chartInstance = null;
 
         function setActiveButton(activeId) {
             document.querySelectorAll('.sidebar-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.courseId === activeId) {
+                if (btn.dataset.navId === activeId) {
                     btn.classList.add('active');
                 }
             });
         }
-
+        
         function displayHomepage() {
             header.innerHTML = `
                 <h2 class="text-3xl font-bold text-gray-800">AMEE 2025 學習總覽</h2>
-                <p class="text-gray-500 mt-2">這是我在 AMEE 2025 參加的 ${Object.keys(courseData).length} 堂重點課程摘要。點擊卡片以深入了解各堂課的詳細筆記與心得。</p>
+                <p class="text-gray-500 mt-2">請選擇左側導覽列的主題，以深入了解相關課程。</p>
             `;
 
-            let summaryHtml = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
-            Object.entries(courseData).forEach(([courseId, course]) => {
-                summaryHtml += `
-                    <div data-course-id="${courseId}" class="summary-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer flex flex-col justify-between">
+            let themeHtml = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+            Object.entries(themes).forEach(([themeId, theme]) => {
+                themeHtml += `
+                    <div data-nav-id="${themeId}" class="theme-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer">
+                        <h4 class="text-xl font-bold text-amee-blue mb-2">${theme.title}</h4>
+                        <p class="text-sm text-gray-500">包含場次：${theme.courses.join(', ')}</p>
+                        <div class="mt-4 text-right text-amee-red font-bold text-sm">
+                            查看課程列表 &rarr;
+                        </div>
+                    </div>
+                `;
+            });
+            themeHtml += '</div>';
+            contentDisplay.innerHTML = themeHtml;
+            contentDisplay.style.display = 'block';
+            document.getElementById('summary-section').style.display = 'none';
+        }
+
+        function displayThemePage(themeId) {
+            const theme = themes[themeId];
+            if (!theme) return;
+
+            header.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800">${theme.title}</h2>
+                <p class="text-gray-500 mt-2">本主題包含 ${theme.courses.length} 堂課程。點擊卡片以查看詳細內容。</p>
+            `;
+
+            let courseListHtml = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
+            theme.courses.forEach(courseId => {
+                const course = courseData[courseId];
+                courseListHtml += `
+                     <div data-course-id="${courseId}" class="summary-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer flex flex-col justify-between">
                         <div>
                             <div class="flex items-center mb-4">
                                 <span class="bg-amee-red text-white text-sm font-bold mr-3 px-3 py-1 rounded-full">${courseId}</span>
@@ -291,10 +348,9 @@
                     </div>
                 `;
             });
-            summaryHtml += '</div>';
-            contentDisplay.innerHTML = summaryHtml;
-            contentDisplay.classList.remove('bg-white', 'p-6', 'md:p-8', 'rounded-2xl', 'shadow-md');
-            document.getElementById('radar-chart-section').style.display = 'none';
+            courseListHtml += '</div>';
+            contentDisplay.innerHTML = courseListHtml;
+            contentDisplay.style.display = 'block';
             document.getElementById('summary-section').style.display = 'none';
         }
 
@@ -307,46 +363,26 @@
                 <p class="text-gray-500 mt-2">您正在檢視 ${courseId}: ${course.type} 的詳細內容。</p>
             `;
             
-            contentDisplay.classList.add('bg-white', 'p-6', 'md:p-8', 'rounded-2xl', 'shadow-md');
-
-            let contentHtml = `
+            let contentHtml = `<div class="bg-white p-6 md:p-8 rounded-2xl shadow-md">`;
+            contentHtml += `
                 <div class="border-b-2 border-amee-red pb-4 mb-6">
                     <span class="bg-amee-blue text-white text-sm font-medium mr-2 px-2.5 py-0.5 rounded">${course.type}</span>
                     <h3 class="text-2xl font-bold text-gray-800 mt-2">${course.title}</h3>
-                    ${course.moderator ? `<p class="text-gray-500 mt-1">主持人: ${course.moderator}</p>` : ''}
-                    ${course.presenters ? `<p class="text-gray-500 mt-1">主講人: ${course.presenters.join(', ')}</p>` : ''}
                 </div>
             `;
             
-            if (course.takeaway) {
-                contentHtml += `
-                    <div class="takeaway-box p-4 rounded-md mb-6">
-                        <h4 class="text-lg font-bold text-amee-red mb-2">💡 重點心得</h4>
-                        ${course.takeaway}
-                    </div>
-                `;
-            }
-
-            contentHtml += `<div class="space-y-6">`;
-
-            if (course.presentations) {
-                course.presentations.forEach(p => {
-                    contentHtml += `
-                        <div class="bg-amee-light-blue p-5 rounded-lg transition-shadow hover:shadow-md">
-                            <h4 class="font-semibold text-amee-blue">${p.id ? p.id + ' - ' : ''}${p.title}</h4>
-                            <p class="text-sm text-gray-600 mt-1">報告者: ${p.presenter}</p>
-                        </div>
-                    `;
-                });
-            }
-
-            if (course.content) {
-                contentHtml += `<div class="prose max-w-none">${course.content}</div>`;
+            if (course.insightData) {
+                const { speakers, contentCore, insight } = course.insightData;
+                contentHtml += `<div class="space-y-6">`;
+                contentHtml += `<div class="insight-section p-5 rounded-lg"><h4 class="flex items-center text-lg font-bold text-amee-blue mb-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>${speakers.title}</h4>${speakers.content}</div>`;
+                contentHtml += `<div class="insight-section p-5 rounded-lg"><h4 class="flex items-center text-lg font-bold text-amee-blue mb-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" /></svg>${contentCore.title}</h4>${contentCore.content}</div>`;
+                contentHtml += `<div class="insight-takeaway p-5 rounded-lg"><h4 class="flex items-center text-lg font-bold text-amee-red mb-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>${insight.title}</h4>${insight.content}</div>`;
+                contentHtml += `</div>`;
             }
 
             contentHtml += `</div>`;
             contentDisplay.innerHTML = contentHtml;
-            document.getElementById('radar-chart-section').style.display = 'none';
+            contentDisplay.style.display = 'block';
             document.getElementById('summary-section').style.display = 'none';
         }
 
@@ -356,138 +392,115 @@
                 <p class="text-gray-500 mt-2">整合本次 AMEE 2025 的核心學習，並轉化為可執行的院內行動方案。</p>
             `;
             contentDisplay.innerHTML = '';
-            contentDisplay.classList.remove('bg-white', 'p-6', 'md:p-8', 'rounded-2xl', 'shadow-md');
-            document.getElementById('radar-chart-section').style.display = 'block';
+            contentDisplay.style.display = 'none';
             document.getElementById('summary-section').style.display = 'block';
+            
+            // Wait a tick for the canvas to be in the DOM
+            setTimeout(initRadarChart, 0);
+        }
+
+        function populateNavigation() {
+            navigationContainer.innerHTML = ''; // Clear existing
+            
+            // Home button
+            const homeLi = document.createElement('li');
+            homeLi.innerHTML = `<button data-nav-id="home" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg><span class="text-left flex-1 font-semibold">首頁總覽</span></button>`;
+            navigationContainer.appendChild(homeLi);
+
+            // Theme buttons
+            Object.entries(themes).forEach(([themeId, theme]) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<button data-nav-id="${themeId}" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg><span class="text-left flex-1">${theme.title}</span></button>`;
+                navigationContainer.appendChild(li);
+            });
+
+            // Summary button
+            const summaryLi = document.createElement('li');
+            summaryLi.innerHTML = `<button data-nav-id="summary" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg><span class="text-left flex-1 font-semibold">總結與應用</span></button>`;
+            navigationContainer.appendChild(summaryLi);
         }
 
         // --- SCRIPT INITIALIZATION ---
+        populateNavigation();
         
-        // 1. Populate navigation
-        const homeLi = document.createElement('li');
-        homeLi.innerHTML = `
-            <button data-course-id="home" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
-                <span class="text-left flex-1 font-semibold">首頁總覽</span>
-            </button>
-        `;
-        navigationContainer.appendChild(homeLi);
-
-        Object.keys(courseData).forEach(courseId => {
-            const course = courseData[courseId];
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <button data-course-id="${courseId}" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="text-left flex-1">${courseId}: ${course.type}</span>
-                </button>
-            `;
-            navigationContainer.appendChild(li);
-        });
-
-        const summaryLi = document.createElement('li');
-        summaryLi.innerHTML = `
-            <button data-course-id="summary" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
-                <span class="text-left flex-1 font-semibold">總結與應用</span>
-            </button>
-        `;
-        navigationContainer.appendChild(summaryLi);
-        
-        // 2. Setup event listeners
         navigationContainer.addEventListener('click', (e) => {
             const button = e.target.closest('.sidebar-btn');
             if(button) {
-                const courseId = button.dataset.courseId;
-                if (courseId === 'home') {
+                const navId = button.dataset.navId;
+                if (navId === 'home') {
                     displayHomepage();
-                } else if (courseId === 'summary') {
+                } else if (navId === 'summary') {
                     displaySummary();
                 } else {
-                    displayCourse(courseId);
+                    displayThemePage(navId);
                 }
-                setActiveButton(courseId);
+                setActiveButton(navId);
             }
         });
 
         contentDisplay.addEventListener('click', (e) => {
-            const card = e.target.closest('.summary-card');
-            if(card) {
-                const courseId = card.dataset.courseId;
+            let targetElement = e.target;
+            const courseCard = targetElement.closest('.summary-card');
+            const themeCard = targetElement.closest('.theme-card');
+
+            if(courseCard) {
+                const courseId = courseCard.dataset.courseId;
+                // Find which theme this course belongs to for setting active button
+                for(const themeId in themes) {
+                    if (themes[themeId].courses.includes(courseId)) {
+                        setActiveButton(themeId);
+                        break;
+                    }
+                }
                 displayCourse(courseId);
-                setActiveButton(courseId);
+            } else if (themeCard) {
+                const themeId = themeCard.dataset.navId;
+                displayThemePage(themeId);
+                setActiveButton(themeId);
             }
         });
-
-        // 3. Initial display on page load
+        
         displayHomepage();
         setActiveButton('home');
 
-        // 4. Initialize Radar Chart
-        const ctx = document.getElementById('knowledgeRadarChart').getContext('2d');
-        const knowledgeRadarChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: [
-                    'CBME & EPA 策略',
-                    'AI 導入教學',
-                    '韌性與身心健康',
-                    '溝通與同理心',
-                    '創新教學與評估',
-                    '正念與自我關懷'
-                ],
-                datasets: [{
-                    label: '知識提升程度',
-                    data: [5, 5, 4, 4, 3, 3],
-                    backgroundColor: 'rgba(217, 34, 45, 0.2)',
-                    borderColor: 'rgba(217, 34, 45, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(217, 34, 45, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(217, 34, 45, 1)'
-                }]
-            },
-            options: {
-                scales: {
-                    r: {
-                        angleLines: {
-                            color: '#e5e7eb'
-                        },
-                        grid: {
-                            color: '#e5e7eb'
-                        },
-                        pointLabels: {
-                            font: {
-                                size: 14,
-                                family: "'Inter', '微軟正黑體', sans-serif"
-                            },
-                            color: '#111827'
-                        },
-                        ticks: {
-                            backdropColor: 'rgba(255, 255, 255, 0.75)',
-                            stepSize: 1,
-                            max: 5,
-                            min: 0
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                             font: {
-                                size: 14,
-                                family: "'Inter', '微軟正黑體', sans-serif"
-                            }
-                        }
-                    }
-                },
-                maintainAspectRatio: true
+        function initRadarChart() {
+            if (chartInstance) {
+                chartInstance.destroy();
             }
-        });
+            if (document.getElementById('knowledgeRadarChart')) {
+                const ctx = document.getElementById('knowledgeRadarChart').getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['CBME & EPA 策略','AI 導入教學','韌性與身心健康','溝通與同理心','創新教學與評估','正念與自我關懷'],
+                        datasets: [{
+                            label: '知識提升程度',
+                            data: [5, 5, 4, 4, 3, 3],
+                            backgroundColor: 'rgba(217, 34, 45, 0.2)',
+                            borderColor: 'rgba(217, 34, 45, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(217, 34, 45, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(217, 34, 45, 1)'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: {
+                                angleLines: { color: '#e5e7eb' },
+                                grid: { color: '#e5e7eb' },
+                                pointLabels: { font: { size: 12, family: "'Inter', '微軟正黑體', sans-serif" }, color: '#111827' },
+                                ticks: { backdropColor: 'rgba(255, 255, 255, 0.75)', stepSize: 1, max: 5, min: 0 }
+                            }
+                        },
+                        plugins: { legend: { position: 'top', labels: { font: { size: 14, family: "'Inter', '微軟正黑體', sans-serif" } } } },
+                        maintainAspectRatio: true
+                    }
+                });
+            }
+        }
+        
     </script>
 
 </body>
