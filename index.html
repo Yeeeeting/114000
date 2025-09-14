@@ -6,200 +6,285 @@
     <title>AMEE 2025 課程回顧</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', '微軟正黑體', sans-serif;
+            background-color: #f0f2f5;
+            color: #1a202c;
         }
         /* 主色調 */
         :root {
             --amee-red: #D9222D;
             --amee-blue: #003F87;
-            --amee-light-blue: #F0F5FA;
-            --amee-gray: #f3f4f6;
+            --amee-light-blue: #eef2f7;
+            --amee-text: #2d3748;
         }
-        .bg-amee-red { background-color: var(--amee-red); }
         .text-amee-red { color: var(--amee-red); }
         .bg-amee-blue { background-color: var(--amee-blue); }
         .text-amee-blue { color: var(--amee-blue); }
-        .bg-amee-light-blue { background-color: var(--amee-light-blue); }
-        .bg-amee-gray { background-color: var(--amee-gray); }
-
-        .sidebar-btn.active {
+        
+        .header-nav a.active {
+            color: var(--amee-red);
+            font-weight: 700;
+        }
+        .header-nav a {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
             background-color: var(--amee-red);
-            color: white;
-            font-weight: 600;
+            transition: width 0.3s ease;
         }
-         .sidebar-btn.active svg {
-            color: white;
+        .header-nav a:hover::after, .header-nav a.active::after {
+            width: 100%;
         }
+
+        .theme-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .theme-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+        }
+
+        .glass-icon {
+            background: rgba(255, 255, 255, 0.7);
+             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+             border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 視覺強化後的洞察區塊 */
         .insight-section {
             border-left: 4px solid var(--amee-blue);
             background-color: #F0F5FA;
         }
         .insight-takeaway {
-             border-left: 4px solid var(--amee-red);
-            background-color: #FEF2F2;
+            background-color: #FFFBEB; /* 溫暖的黃色調 */
+            border-left: 5px solid #FBBF24; /* 醒目的琥珀色 */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
         }
-        .theme-card {
-            background-size: 200% 200%;
-            background-position: 50% 50%;
-            transition: all 0.4s ease;
-        }
-        .theme-card:hover {
-            background-position: 100% 100%;
-            transform: scale(1.03);
+        .insight-takeaway h4 {
+            color: #B45309; /* 深琥珀色文字 */
         }
     </style>
 </head>
-<body class="bg-amee-gray">
+<body class="bg-gray-100">
 
-    <div class="flex flex-col md:flex-row min-h-screen">
-        <!-- Sidebar -->
-        <nav class="w-full md:w-64 bg-white p-4 md:p-6 shadow-lg md:fixed md:h-full overflow-y-auto">
-            <div class="flex items-center mb-8">
-                <div class="bg-amee-blue p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.43,7.662l-2.828,2.828a1,1,0,0,1-1.414,0l-2.828-2.828" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.57,16.338l2.828-2.828a1,1,0,0,1-1.414,0l2.828,2.828" />
-                    </svg>
-                </div>
-                <h1 class="text-xl font-bold text-amee-blue ml-3">AMEE 2025</h1>
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="#" data-nav-id="home" class="flex items-center space-x-3">
+                    <div class="bg-amee-blue p-2 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18" />
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-extrabold text-amee-blue">AMEE 2025</h1>
+                </a>
             </div>
-            <ul class="space-y-2" id="course-navigation">
-                <!-- Navigation buttons will be injected here by JavaScript -->
-            </ul>
+            <div id="course-navigation" class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-600 header-nav">
+                 <!-- Navigation links injected here -->
+            </div>
         </nav>
+    </header>
 
-        <!-- Main Content -->
-        <main class="flex-1 md:ml-64 p-4 md:p-8 lg:p-12">
-            <header class="mb-8">
-                <!-- Header content will be dynamically updated -->
-            </header>
-            <div id="content-display" class="transition-all duration-300">
-                <!-- Course content will be displayed here -->
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8 lg:p-12">
+        <div id="content-display" class="transition-all duration-300">
+            <!-- Dynamic content will be displayed here -->
+        </div>
+    </main>
+
+    <!-- This section is now a template, hidden from view but accessible to the script -->
+    <template id="summary-section-template">
+        <div class="space-y-12">
+            <div id="cbme-strategy-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">總結之CBME策略</h3>
+                <p class="text-gray-600 mb-6">本策略對接本院CBME白皮書，旨在將AMEE 2025的國際趨勢，轉化為具體可執行的跨專業團隊導入方案，以確保教學與臨床服務品質的雙軸提升。</p>
+                <div class="space-y-6">
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2">奇美現況分析（SWOT或是其他分析架構）</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div class="bg-green-50 p-3 rounded"><strong>優勢(S):</strong> 跨院區整合、臨床量能充足、資訊系統成熟、跨職類協作文化。</div>
+                            <div class="bg-yellow-50 p-3 rounded"><strong>劣勢/缺口(W):</strong> 共通能力模型一致性、評量證據品質與節奏、治理機制與數據整合、師資分級與培育路徑等面向需強化。</div>
+                            <div class="bg-blue-50 p-3 rounded"><strong>機會(O):</strong> AMEE國際趨勢驗證此方向、健康台灣計畫提供資源、ACGME/CanMEDS等國際框架可供對接。</div>
+                            <div class="bg-red-50 p-3 rounded"><strong>威脅(T):</strong> 外部評鑑要求日增、智慧醫療快速發展帶來評量與教學模式變革壓力。</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2">如何導入或是應用於奇美（什麼導入的理論與框架）</h5>
+                        <p class="text-sm text-gray-600">採用 <strong class="text-amee-blue">科特 (Kotter) 的八步變革法</strong> 作為變革管理框架，並將 <strong class="text-amee-blue">本院CBME白皮書之「四大推動支柱」</strong> 作為具體行動方案的核心，確保策略的連貫性與執行力。</p>
+                    </div>
+                </div>
             </div>
-            
-            <section id="summary-section" class="mt-12" style="display: none;">
-                <div class="space-y-12">
-                    <div id="cbme-strategy-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
-                        <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">總結之CBME策略</h3>
-                        <p class="text-gray-600 mb-6">本策略對接本院CBME白皮書，旨在將AMEE 2025的國際趨勢，轉化為具體可執行的跨專業團隊導入方案，以確保教學與臨床服務品質的雙軸提升。</p>
-                        <div class="space-y-6">
-                            <div>
-                                <h5 class="font-bold text-gray-800 mb-2">奇美現況分析（SWOT或是其他分析架構）</h5>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                                    <div class="bg-green-50 p-3 rounded"><strong>優勢(S):</strong> 跨院區整合、臨床量能充足、資訊系統成熟、跨職類協作文化。</div>
-                                    <div class="bg-yellow-50 p-3 rounded"><strong>劣勢/缺口(W):</strong> 共通能力模型一致性、評量證據品質與節奏、治理機制與數據整合、師資分級與培育路徑等面向需強化。</div>
-                                    <div class="bg-blue-50 p-3 rounded"><strong>機會(O):</strong> AMEE國際趨勢驗證此方向、健康台灣計畫提供資源、ACGME/CanMEDS等國際框架可供對接。</div>
-                                    <div class="bg-red-50 p-3 rounded"><strong>威脅(T):</strong> 外部評鑑要求日增、智慧醫療快速發展帶來評量與教學模式變革壓力。</div>
-                                </div>
+            <div id="personal-growth-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">學習成效與能力成長</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h4 class="font-bold text-amee-blue mb-2">學習能力雷達圖</h4>
+                        <p class="text-gray-600 text-sm mb-4">此圖表綜合分析本次參與 AMEE 2025 所獲得的知識與技能提升。分數代表在各領域的深化程度（1-5分），5分表示透過多場次深入探討，已達可策略性應用的程度。</p>
+                        <canvas id="knowledgeRadarChart"></canvas>
+                    </div>
+                    <div>
+                         <h4 class="font-bold text-amee-blue mb-2">關鍵成長摘要</h4>
+                         <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
+                             <li><strong>宏觀視野:</strong> 對全球CBME與AI導入醫學教育的宏觀趨勢與挑戰，建立了系統性的理解。</li>
+                             <li><strong>策略思維:</strong> 學習到如何將外部新知（如AMEE洞察）與內部策略（如健康台灣計畫、CBME白皮書）對接，形成可執行的方案。</li>
+                             <li><strong>人文關懷:</strong> 深化了對醫護人員心理韌性、同理心與正念等「軟實力」重要性的認知，並學習到創新的培育方法。</li>
+                             <li><strong>工具應用:</strong> 掌握了如SWOT、變革管理模型、洞察框架等商業分析工具，能更結構化地分析問題與規劃策略。</li>
+                             <li><strong>實務與網絡連結:</strong> 深刻體會到跨院際的非正式交流與標竿學習(Benchmarking)的價值，無論是在知識分享（AI導入經驗）或大型活動的運營管理上，都獲得了寶貴的實務啟發。</li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="insights-framework" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">洞察與行動框架 (What / So What / Now What)</h3>
+                <p class="text-gray-600 mb-8">為將學習效益最大化，此框架將會議中的觀察，針對四大核心主題及通用領域，轉化為具體的行動方案。</p>
+                
+                <div class="space-y-8">
+                    <!-- CBME Insight -->
+                    <div>
+                        <h4 class="text-lg font-bold text-amee-blue mb-4 pb-2 border-b">CBME 策略與評估</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                             <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫關於CBME的觀察...]</div>
                             </div>
                             <div>
-                                <h5 class="font-bold text-gray-800 mb-2">如何導入或是應用於奇美（什麼導入的理論與框架）</h5>
-                                <p class="text-sm text-gray-600">採用 <strong class="text-amee-blue">科特 (Kotter) 的八步變革法</strong> 作為變革管理框架，並將 <strong class="text-amee-blue">本院CBME白皮書之「四大推動支柱」</strong> 作為具體行動方案的核心，確保策略的連貫性與執行力。</p>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫對奇美的意義...]</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫具體行動方案...]</div>
                             </div>
                         </div>
                     </div>
-                    <div id="personal-growth-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
-                        <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">個人洞察</h3>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <h4 class="font-bold text-amee-blue mb-2">學習能力雷達圖</h4>
-                                <p class="text-gray-600 text-sm mb-4">此圖表綜合分析本次參與 AMEE 2025 所獲得的知識與技能提升。分數代表在各領域的深化程度（1-5分），5分表示透過多場次深入探討，已達可策略性應用的程度。</p>
-                                <canvas id="knowledgeRadarChart"></canvas>
+                    <!-- AI Insight -->
+                    <div>
+                        <h4 class="text-lg font-bold text-amee-blue mb-4 pb-2 border-b">AI 於醫學教育之應用</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                             <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">在會場中與不同醫院的同道（如長庚的醫檢師）自然地接續起關於AI導入的討論，發現大家面臨的挑戰與目標高度一致。</div>
                             </div>
                             <div>
-                                 <h4 class="font-bold text-amee-blue mb-2">關鍵成長摘要</h4>
-                                 <ul class="list-disc list-inside text-gray-700 space-y-2 text-sm">
-                                     <li><strong>宏觀視野:</strong> 對全球CBME與AI導入醫學教育的宏觀趨勢與挑戰，建立了系統性的理解。</li>
-                                     <li><strong>策略思維:</strong> 學習到如何將外部新知（如AMEE洞察）與內部策略（如健康台灣計畫、CBME白皮書）對接，形成可執行的方案。</li>
-                                     <li><strong>人文關懷:</strong> 深化了對醫護人員心理韌性、同理心與正念等「軟實力」重要性的認知，並學習到創新的培育方法。</li>
-                                     <li><strong>工具應用:</strong> 掌握了如SWOT、變革管理模型、洞察框架等商業分析工具，能更結構化地分析問題與規劃策略。</li>
-                                     <li><strong>實務與網絡連結:</strong> 深刻體會到跨院際的非正式交流與標竿學習(Benchmarking)的價值，無論是在知識分享（AI導入經驗）或大型活動的運營管理上，都獲得了寶貴的實務啟發。</li>
-                                 </ul>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">這意味著單一機構的閉門造車效率有限。一個結構化的跨院學習社群(CoP)能大幅加速最佳實踐的擴散與共同解決問題，創造1+1>2的綜效，對齊「把有用的新知帶回去」的共同目標。</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">建議教學部主動發起一個「南台灣醫學教育AI應用SIG（特別興趣小組）」，邀請區域內合作醫院的同道，從每季一次的線上分享會開始，將自發的交流制度化。</div>
                             </div>
                         </div>
                     </div>
-                    <div id="insights-framework" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
-                        <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">洞察與行動框架 (What / So What / Now What)</h3>
-                        <p class="text-gray-600 mb-6">為將學習效益最大化，建議使用以下框架，將會議中的觀察轉化為具體的行動方案。</p>
-                        <div class="space-y-6">
-                            <div class="border border-gray-200 rounded-lg p-4 transition-shadow hover:shadow-md">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
-                                        <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">在會場中與不同醫院的同道（如長庚的醫檢師）自然地接續起關於AI導入的討論，發現大家面臨的挑戰與目標高度一致。</div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
-                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">這意味著單一機構的閉門造車效率有限。一個結構化的跨院學習社群(CoP)能大幅加速最佳實踐的擴散與共同解決問題，創造1+1>2的綜效，對齊「把有用的新知帶回去」的共同目標。</div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
-                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">建議教學部主動發起一個「南台灣醫學教育AI應用SIG（特別興趣小組）」，邀請區域內合作醫院的同道，從每季一次的線上分享會開始，將自發的交流制度化。</div>
-                                    </div>
-                                </div>
+                    <!-- Resilience Insight -->
+                    <div>
+                        <h4 class="text-lg font-bold text-amee-blue mb-4 pb-2 border-b">韌性與人文關懷</h4>
+                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                             <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫關於韌性與人文的觀察...]</div>
                             </div>
-                            <div class="border border-gray-200 rounded-lg p-4 transition-shadow hover:shadow-md">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
-                                        <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">AMEE主辦方透過其行動app提供即時議程、地圖與推播通知，並在實體場域細心規劃動線、無障礙空間、多元餐飲與安靜區，展現了卓越的運營管理能力。</div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
-                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">這證明了「學習者體驗」不僅來自課程內容，更來自無摩擦的後勤支援。優化後勤能降低學員的認知負荷，使其能更專注於學習本身。這為本院舉辦大型訓練活動（如新進人員訓練）樹立了新的標竿。</div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-amee-blue flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
-                                         <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded h-auto min-h-[10rem]">建議成立一個跨部門的「院內學習活動體驗優化小組」，盤點現有大型訓練活動的流程，並依據AMEE的標竿，建立一份「奇美學習活動體驗檢核表」，從下一次的新進人員訓練開始試行。</div>
-                                    </div>
-                                </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫對奇美的意義...]</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫具體行動方案...]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fringe Insight -->
+                    <div>
+                        <h4 class="text-lg font-bold text-amee-blue mb-4 pb-2 border-b">Fringe 創新活動</h4>
+                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                             <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫關於Fringe活動的觀察...]</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫對奇美的意義...]</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">[請填寫具體行動方案...]</div>
+                            </div>
+                        </div>
+                    </div>
+                     <div>
+                        <h4 class="text-lg font-bold text-amee-blue mb-4 pb-2 border-b">通用洞察：會議運營與管理</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>觀察 (What?)</h4>
+                                <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">AMEE主辦方透過其行動app提供即時議程、地圖與推播通知，並在實體場域細心規劃動線、無障礙空間、多元餐飲與安靜區，展現了卓越的運營管理能力。</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>解讀 (So What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">這證明了「學習者體驗」不僅來自課程內容，更來自無摩擦的後勤支援。優化後勤能降低學員的認知負荷，使其能更專注於學習本身。這為本院舉辦大型教學研討活動樹立了新的標竿。</div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>行動 (Now What?)</h4>
+                                 <div class="text-sm text-gray-700 mt-2 bg-gray-50 p-3 rounded h-auto min-h-[10rem]">建議成立一個跨部門的「院內學習活動體驗優化小組」，盤點現有大型訓練活動的流程，並依據AMEE的標竿，建立一份「奇美學習活動體驗檢核表」，從下一次的新進人員訓練開始試行。</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
-    </div>
+            </div>
+        </div>
+    </template>
 
     <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
         const themes = {
+            'home': {
+                title: '首頁總覽'
+            },
             'cbme': { 
                 title: 'CBME 策略與評估', 
                 courses: ['2W', '4D', '7B'],
                 keywords: 'EPA, Milestone, CCC, 評量, 信任',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>`,
-                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>`
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
             },
             'ai': { 
                 title: 'AI 於醫學教育之應用', 
                 courses: ['4G'],
                 keywords: '虛擬病人, LLM, OSCE, 數據驅動',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 17h.01M15 17h.01M9 10h.01M12 10h.01M15 10h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
-                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 17h.01M15 17h.01M9 10h.01M12 10h.01M15 10h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>`
             },
             'resilience': { 
                 title: '韌性與人文關懷', 
                 courses: ['6J'],
                 keywords: '職業倦怠, 冒名頂替, 同理心, 心理安全',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`,
-                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`
             },
             'fringe': { 
                 title: 'Fringe 創新活動', 
                 courses: ['5E'],
                 keywords: '正念, 跨領域, 創意, 身心平衡',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
-                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`
             },
              'summary': {
                 title: '總結與應用',
                 keywords: '策略規劃, 個人成長, 行動方案',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
-                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`
             }
         };
 
@@ -214,7 +299,7 @@
                     },
                     contentCore: {
                         title: "課程內容主軸與內容",
-                        content: `<p class="text-gray-600 mb-2 text-sm">本工作坊的核心在於探討將源於北半球的 EPA (Entrustable Professional Activities) 概念，應用於南半球國家時所面臨的獨特挑戰與策略。</p><strong class="text-gray-700 text-sm">主要議題:</strong><ul class="list-decimal list-inside text-gray-600 mt-1 text-sm"><li>南北半球在PGME訓練目標與結構上的根本差異。</li><li>在地化發展 EPA 的框架與實務技巧。</li><li>透過小組討論，分享各國在 EPA 導入過程中的挑戰、初步成果與未來方向。</li></ul>`
+                        content: `<p class="text-gray-600 mb-2 text-sm">本工作坊的核心在於探討將源於北半球的 EPA (Entrustable Professional Activities) 概念，應用於南半球國家時所面臨的獨特挑戰與策略。</p><strong class="text-gray-700 text-sm">主要議題:</strong><ul class="list-decimal list-inside text-gray-600 mt-1 text-sm"><li>南北半球在PGME訓練目標與結構上的根本差異。</li><li>在地化發展 EPA の框架與實務技巧。</li><li>透過小組討論，分享各國在 EPA 導入過程中的挑戰、初步成果與未來方向。</li></ul>`
                     },
                     insight: {
                         title: "課程洞察",
@@ -236,7 +321,7 @@
                     },
                     insight: {
                         title: "課程洞察",
-                        content: `<p class="text-gray-700 text-sm">研究發表將宏觀概念轉化為可操作的方案。其中一個關於同理心的比喻讓我印象深刻：真正的同理，不是陪著對方一起掉進情緒的井裡，而是帶著梯子下去幫他。這種說法很貼近臨床工作的節奏，能直接應用於新進人員的入職訓練和關懷機制中。</p>`
+                        content: `<p class="text-gray-700 text-sm">研究發表將宏觀概念轉化為可操作的方案。其中一個關於同理心的比喻讓我印象深刻：真正的同理，不是陪著對方一起掉進情緒の井裡，而是帶著梯子下去幫他。這種說法很貼近臨床工作的節奏，能直接應用於新進人員的入職訓練和關懷機制中。</p>`
                     }
                 }
             },
@@ -268,7 +353,7 @@
                     },
                     contentCore: {
                         title: "課程內容主軸與內容",
-                        content: `<p class="text-gray-600 mb-2 text-sm">此活動旨在打破傳統醫學教育的框架，透過極富創意的展演形式，探索醫學與人文、藝術、身心健康的交集。Fringe 強調體驗與互動，鼓勵與會者跳脫舒適圈，從不同角度思考「療癒」與「學習」。</p><strong class="text-gray-700 text-sm">活動亮點:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li>將正念呼吸應用於緩解 OSCE 前的焦慮。</li><li>以詼諧短劇呈現評估量表(Rubrics)の正確使用時機。</li><li>透過皮拉提斯探討身心平衡，以及用詩歌、音樂、寶萊塢舞蹈表達臨床經驗。</li></ul>`
+                        content: `<p class="text-gray-600 mb-2 text-sm">此活動旨在打破傳統醫學教育の框架，透過極富創意的展演形式，探索醫學與人文、藝術、身心健康的交集。Fringe 強調體驗與互動，鼓勵與會者跳脫舒適圈，從不同角度思考「療癒」與「學習」。</p><strong class="text-gray-700 text-sm">活動亮點:</strong><ul class="list-disc list-inside text-gray-600 mt-1 text-sm"><li>將正念呼吸應用於緩解 OSCE 前的焦慮。</li><li>以詼諧短劇呈現評估量表(Rubrics)の正確使用時機。</li><li>透過皮拉提斯探討身心平衡，以及用詩歌、音樂、寶Lä塢舞蹈表達臨床經驗。</li></ul>`
                     },
                     insight: {
                         title: "課程洞察",
@@ -316,101 +401,87 @@
 
         const navigationContainer = document.getElementById('course-navigation');
         const contentDisplay = document.getElementById('content-display');
-        const header = document.querySelector('header');
         let chartInstance = null;
 
         function setActiveButton(activeId) {
-            document.querySelectorAll('.sidebar-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.navId === activeId) {
-                    btn.classList.add('active');
+            document.querySelectorAll('.header-nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.navId === activeId) {
+                    link.classList.add('active');
                 }
             });
         }
         
         function displayHomepage() {
-             header.innerHTML = `
-                <h2 class="text-3xl font-bold text-gray-800">AMEE 2025 學習總覽</h2>
-                <p class="text-gray-500 mt-2">本次學習聚焦於四大核心主題，下方為各主題摘要與最終的策略總結。</p>
-            `;
+            let homepageHTML = `
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-6xl font-extrabold text-amee-blue tracking-tight">AMEE 2025 學習總覽</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-500">本次學習聚焦於四大核心主題，下方為各主題摘要與最終的策略總結。</p>
+                </div>
+                <div id="theme-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">`;
 
-            let homepageHTML = `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">`;
             Object.entries(themes).forEach(([themeId, theme]) => {
-                if (themeId !== 'summary') { 
-                    const themeIconLarge = theme.icon.replace('h-5 w-5 mr-3 text-amee-red', 'h-8 w-8 text-amee-blue');
+                 if (themeId !== 'summary' && theme.icon) {
+                    const themeIconLarge = theme.icon;
                     homepageHTML += `
-                        <div data-nav-id="${themeId}" 
-                             class="theme-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col justify-between overflow-hidden relative"
-                             style="background-image: linear-gradient(45deg, var(--amee-light-blue) 0%, white 100%);">
-                             
-                            <div class="relative z-10 flex flex-col h-full">
-                                <div class="flex items-start justify-between">
-                                    <div>
-                                        <h4 class="text-xl font-bold text-amee-blue mb-2">${theme.title}</h4>
-                                        <p class="text-sm text-gray-500 font-medium">${theme.keywords}</p>
-                                    </div>
-                                    <div class="w-12 h-12 flex items-center justify-center bg-white/70 backdrop-blur-sm rounded-full shadow-md">
-                                        ${themeIconLarge}
-                                    </div>
+                        <a href="#" data-nav-id="${themeId}" class="theme-card block p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group" style="background-image: linear-gradient(135deg, white 0%, var(--amee-light-blue) 100%);">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-amee-blue">${theme.title}</h3>
+                                    <p class="text-sm text-gray-500 mt-2 font-medium">${theme.keywords}</p>
                                 </div>
-                                <div class="flex-grow"></div>
-                                <div class="mt-4 text-right text-amee-red font-bold text-sm flex items-center justify-end group-hover:text-amee-blue transition-colors">
-                                    <span>查看 ${theme.courses.length} 堂課程</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                <div class="glass-icon w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-full">
+                                    ${themeIconLarge}
                                 </div>
                             </div>
-                        </div>
+                            <div class="mt-6 text-right text-amee-red font-bold text-sm flex items-center justify-end group-hover:text-amee-blue transition-colors">
+                                <span>查看 ${theme.courses.length} 堂課程</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </div>
+                        </a>
                     `;
-                }
+                 }
             });
             homepageHTML += `</div>`;
             
-            const summaryTheme = themes['summary'];
-            const summaryIconLarge = summaryTheme.icon.replace('h-5 w-5 mr-3 text-amee-red', 'h-8 w-8 text-white');
-            homepageHTML += `
-                <div data-nav-id="summary" 
-                     class="theme-card bg-amee-blue mt-8 p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col justify-between overflow-hidden relative"
-                     style="background-image: linear-gradient(45deg, #003F87 0%, #002c60 100%);">
-                     
-                    <div class="relative z-10 flex flex-col h-full">
+             const summaryTheme = themes['summary'];
+             if(summaryTheme && summaryTheme.icon) {
+                const summaryIconLarge = summaryTheme.icon;
+                homepageHTML += `
+                    <a href="#" data-nav-id="summary" class="theme-card block mt-8 p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group" style="background-image: linear-gradient(135deg, #003F87 0%, #002c60 100%);">
                         <div class="flex items-start justify-between">
                             <div>
-                                <h4 class="text-xl font-bold text-white mb-2">${summaryTheme.title}</h4>
-                                <p class="text-sm text-gray-300 font-medium">${summaryTheme.keywords}</p>
+                                <h3 class="text-2xl font-bold text-white">${summaryTheme.title}</h3>
+                                <p class="text-sm text-gray-300 mt-2 font-medium">${summaryTheme.keywords}</p>
                             </div>
-                            <div class="w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full shadow-md">
-                                ${summaryIconLarge}
+                            <div class="bg-white/10 backdrop-blur-sm w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-full">
+                            ${summaryIconLarge}
                             </div>
                         </div>
-                        <div class="flex-grow"></div>
-                        <div class="mt-4 text-right text-white font-bold text-sm flex items-center justify-end group-hover:text-yellow-300 transition-colors">
+                        <div class="mt-6 text-right text-white font-bold text-sm flex items-center justify-end group-hover:text-yellow-300 transition-colors">
                             <span>查看詳細計畫</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </div>
-                    </div>
-                </div>
-            `;
-
-
+                    </a>
+                `;
+             }
             contentDisplay.innerHTML = homepageHTML;
-            contentDisplay.style.display = 'block';
-            document.getElementById('summary-section').style.display = 'none';
         }
 
         function displayThemePage(themeId) {
             const theme = themes[themeId];
             if (!theme) return;
 
-            header.innerHTML = `
-                <h2 class="text-3xl font-bold text-gray-800">${theme.title}</h2>
-                <p class="text-gray-500 mt-2">本主題包含 ${theme.courses.length} 堂課程。點擊卡片以查看詳細內容。</p>
-            `;
-
-            let courseListHtml = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
+            let courseListHtml = `
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">${theme.title}</h2>
+                    <p class="text-gray-500 mt-2">本主題包含 ${theme.courses.length} 堂課程。點擊卡片以查看詳細內容。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">`;
             theme.courses.forEach(courseId => {
                 const course = courseData[courseId];
                 courseListHtml += `
-                     <div data-course-id="${courseId}" class="summary-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer flex flex-col justify-between group">
+                     <a href="#" data-course-id="${courseId}" class="summary-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center mb-4">
                                 <span class="bg-amee-red text-white text-sm font-bold mr-3 px-3 py-1 rounded-full">${courseId}</span>
@@ -422,23 +493,16 @@
                             <span>查看詳情</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </div>
-                    </div>
+                    </a>
                 `;
             });
             courseListHtml += '</div>';
             contentDisplay.innerHTML = courseListHtml;
-            contentDisplay.style.display = 'block';
-            document.getElementById('summary-section').style.display = 'none';
         }
 
         function displayCourse(courseId) {
             const course = courseData[courseId];
             if (!course) return;
-
-            header.innerHTML = `
-                <h2 class="text-3xl font-bold text-gray-800">課程回顧</h2>
-                <p class="text-gray-500 mt-2">您正在檢視 ${courseId}: ${course.type} 的詳細內容。</p>
-            `;
             
             let contentHtml = `<div class="bg-white p-6 md:p-8 rounded-2xl shadow-md">`;
             contentHtml += `
@@ -459,51 +523,43 @@
 
             contentHtml += `</div>`;
             contentDisplay.innerHTML = contentHtml;
-            contentDisplay.style.display = 'block';
-            document.getElementById('summary-section').style.display = 'none';
         }
-
+        
         function displaySummary() {
-            header.innerHTML = `
-                <h2 class="text-3xl font-bold text-gray-800">學習總結與應用策略</h2>
-                <p class="text-gray-500 mt-2">整合本次 AMEE 2025 的核心學習，並轉化為可執行的院內行動方案。</p>
+            const summaryTemplate = document.getElementById('summary-section-template');
+            if (!summaryTemplate) return;
+
+            contentDisplay.innerHTML = `
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">學習總結與應用策略</h2>
+                    <p class="text-gray-500 mt-2">整合本次 AMEE 2025 的核心學習，並轉化為可執行的院內行動方案。</p>
+                </div>
+                ${summaryTemplate.innerHTML}
             `;
-            contentDisplay.innerHTML = '';
-            contentDisplay.style.display = 'none';
-            document.getElementById('summary-section').style.display = 'block';
-            
             setTimeout(initRadarChart, 0);
         }
 
         function populateNavigation() {
-            navigationContainer.innerHTML = ''; // Clear existing
-            
-            const homeLi = document.createElement('li');
-            homeLi.innerHTML = `<button data-nav-id="home" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg><span class="text-left flex-1 font-semibold">首頁總覽</span></button>`;
-            navigationContainer.appendChild(homeLi);
-
-            Object.entries(themes).forEach(([themeId, theme]) => {
-                if (themeId !== 'summary') {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<button data-nav-id="${themeId}" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">${theme.sidebar_icon}<span class="text-left flex-1">${theme.title}</span></button>`;
-                    navigationContainer.appendChild(li);
-                }
-            });
-
-            const summaryLi = document.createElement('li');
-            const summaryTheme = themes['summary'];
-            summaryLi.innerHTML = `<button data-nav-id="summary" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">${summaryTheme.sidebar_icon}<span class="text-left flex-1 font-semibold">${summaryTheme.title}</span></button>`;
-            navigationContainer.appendChild(summaryLi);
+            navigationContainer.innerHTML = '';
+             let navHTML = `<a href="#" data-nav-id="home" class="sidebar-btn">首頁總覽</a>`;
+             Object.entries(themes).forEach(([themeId, theme]) => {
+                navHTML += `<a href="#" data-nav-id="${themeId}" class="sidebar-btn">${theme.title}</a>`;
+             });
+            navigationContainer.innerHTML = navHTML;
         }
 
         // --- SCRIPT INITIALIZATION ---
         populateNavigation();
         
-        navigationContainer.addEventListener('click', (e) => {
-            const button = e.target.closest('.sidebar-btn');
-            if(button) {
-                const navId = button.dataset.navId;
-                if (navId === 'home') {
+        document.body.addEventListener('click', (e) => {
+            const navLink = e.target.closest('.header-nav a');
+            const themeCard = e.target.closest('.theme-card');
+            const courseCard = e.target.closest('.summary-card');
+            
+            if (navLink) {
+                e.preventDefault();
+                const navId = navLink.dataset.navId;
+                 if (navId === 'home') {
                     displayHomepage();
                 } else if (navId === 'summary') {
                     displaySummary();
@@ -511,31 +567,25 @@
                     displayThemePage(navId);
                 }
                 setActiveButton(navId);
-            }
-        });
-
-        contentDisplay.addEventListener('click', (e) => {
-            let targetElement = e.target;
-            const courseCard = targetElement.closest('.summary-card');
-            const themeCard = targetElement.closest('.theme-card');
-
-            if(courseCard) {
-                const courseId = courseCard.dataset.courseId;
-                for(const themeId in themes) {
-                    if (themes[themeId].courses.includes(courseId)) {
-                        setActiveButton(themeId);
-                        break;
-                    }
-                }
-                displayCourse(courseId);
             } else if (themeCard) {
+                e.preventDefault();
                 const navId = themeCard.dataset.navId;
-                 if (navId === 'summary') {
+                if (navId === 'summary') {
                     displaySummary();
                 } else {
                     displayThemePage(navId);
                 }
                 setActiveButton(navId);
+            } else if (courseCard) {
+                 e.preventDefault();
+                const courseId = courseCard.dataset.courseId;
+                displayCourse(courseId);
+                for(const themeId in themes) {
+                    if (themes[themeId].courses && themes[themeId].courses.includes(courseId)) {
+                        setActiveButton(themeId);
+                        break;
+                    }
+                }
             }
         });
         
@@ -546,8 +596,9 @@
             if (chartInstance) {
                 chartInstance.destroy();
             }
-            if (document.getElementById('knowledgeRadarChart')) {
-                const ctx = document.getElementById('knowledgeRadarChart').getContext('2d');
+            const canvas = document.getElementById('knowledgeRadarChart');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
                 chartInstance = new Chart(ctx, {
                     type: 'radar',
                     data: {
@@ -579,7 +630,7 @@
                 });
             }
         }
-        
+    });    
     </script>
 
 </body>
