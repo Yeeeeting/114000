@@ -41,6 +41,15 @@
              border-left: 4px solid var(--amee-red);
             background-color: #FEF2F2;
         }
+        .theme-card {
+            background-size: 200% 200%;
+            background-position: 50% 50%;
+            transition: all 0.4s ease;
+        }
+        .theme-card:hover {
+            background-position: 100% 100%;
+            transform: scale(1.03);
+        }
     </style>
 </head>
 <body class="bg-amee-gray">
@@ -72,10 +81,8 @@
                 <!-- Course content will be displayed here -->
             </div>
             
-            <!-- Summary and Application Section -->
             <section id="summary-section" class="mt-12" style="display: none;">
                 <div class="space-y-12">
-                    <!-- Section 1: Summarized CBME Strategy -->
                     <div id="cbme-strategy-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">總結之CBME策略</h3>
                         <p class="text-gray-600 mb-6">本策略對接本院CBME白皮書，旨在將AMEE 2025的國際趨勢，轉化為具體可執行的跨專業團隊導入方案，以確保教學與臨床服務品質的雙軸提升。</p>
@@ -95,8 +102,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Section 2: Personal Growth and Insights -->
                     <div id="personal-growth-summary" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">個人洞察</h3>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -117,13 +122,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Section 3: Insights Framework -->
                     <div id="insights-framework" class="bg-white p-6 md:p-8 rounded-2xl shadow-md">
                         <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-amee-red pb-4 mb-6">洞察與行動框架 (What / So What / Now What)</h3>
-                        <p class="text-gray-600 mb-6">為將學習效益最大化，建議使用以下框架，將會議中的觀察轉化為具體的行動方案。請在此處填寫您的洞察：</p>
+                        <p class="text-gray-600 mb-6">為將學習效益最大化，建議使用以下框架，將會議中的觀察轉化為具體的行動方案。</p>
                         <div class="space-y-6">
-                            <!-- Insight 1: Cross-Hospital Collaboration -->
                             <div class="border border-gray-200 rounded-lg p-4 transition-shadow hover:shadow-md">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
@@ -140,7 +142,6 @@
                                     </div>
                                 </div>
                             </div>
-                             <!-- Insight 2: User-Centric Event Management -->
                             <div class="border border-gray-200 rounded-lg p-4 transition-shadow hover:shadow-md">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
@@ -166,10 +167,40 @@
 
     <script>
         const themes = {
-            'cbme': { title: 'CBME 策略與評估', courses: ['2W', '4D', '7B'] },
-            'ai': { title: 'AI 於醫學教育之應用', courses: ['4G'] },
-            'resilience': { title: '韌性與人文關懷', courses: ['6J'] },
-            'fringe': { title: 'Fringe 創新活動', courses: ['5E'] }
+            'cbme': { 
+                title: 'CBME 策略與評估', 
+                courses: ['2W', '4D', '7B'],
+                keywords: 'EPA, Milestone, CCC, 評量, 信任',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>`,
+                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>`
+            },
+            'ai': { 
+                title: 'AI 於醫學教育之應用', 
+                courses: ['4G'],
+                keywords: '虛擬病人, LLM, OSCE, 數據驅動',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 17h.01M15 17h.01M9 10h.01M12 10h.01M15 10h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
+                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 17h.01M15 17h.01M9 10h.01M12 10h.01M15 10h.01M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`
+            },
+            'resilience': { 
+                title: '韌性與人文關懷', 
+                courses: ['6J'],
+                keywords: '職業倦怠, 冒名頂替, 同理心, 心理安全',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`,
+                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`
+            },
+            'fringe': { 
+                title: 'Fringe 創新活動', 
+                courses: ['5E'],
+                keywords: '正念, 跨領域, 創意, 身心平衡',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amee-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`
+            },
+             'summary': {
+                title: '總結與應用',
+                keywords: '策略規劃, 個人成長, 行動方案',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+                sidebar_icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`
+            }
         };
 
         const courseData = {
@@ -298,25 +329,70 @@
         }
         
         function displayHomepage() {
-            header.innerHTML = `
+             header.innerHTML = `
                 <h2 class="text-3xl font-bold text-gray-800">AMEE 2025 學習總覽</h2>
-                <p class="text-gray-500 mt-2">請選擇左側導覽列的主題，以深入了解相關課程。</p>
+                <p class="text-gray-500 mt-2">本次學習聚焦於四大核心主題，下方為各主題摘要與最終的策略總結。</p>
             `;
 
-            let themeHtml = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+            let homepageHTML = `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">`;
             Object.entries(themes).forEach(([themeId, theme]) => {
-                themeHtml += `
-                    <div data-nav-id="${themeId}" class="theme-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer">
-                        <h4 class="text-xl font-bold text-amee-blue mb-2">${theme.title}</h4>
-                        <p class="text-sm text-gray-500">包含場次：${theme.courses.join(', ')}</p>
-                        <div class="mt-4 text-right text-amee-red font-bold text-sm">
-                            查看課程列表 &rarr;
+                if (themeId !== 'summary') { 
+                    const themeIconLarge = theme.icon.replace('h-5 w-5 mr-3 text-amee-red', 'h-8 w-8 text-amee-blue');
+                    homepageHTML += `
+                        <div data-nav-id="${themeId}" 
+                             class="theme-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col justify-between overflow-hidden relative"
+                             style="background-image: linear-gradient(45deg, var(--amee-light-blue) 0%, white 100%);">
+                             
+                            <div class="relative z-10 flex flex-col h-full">
+                                <div class="flex items-start justify-between">
+                                    <div>
+                                        <h4 class="text-xl font-bold text-amee-blue mb-2">${theme.title}</h4>
+                                        <p class="text-sm text-gray-500 font-medium">${theme.keywords}</p>
+                                    </div>
+                                    <div class="w-12 h-12 flex items-center justify-center bg-white/70 backdrop-blur-sm rounded-full shadow-md">
+                                        ${themeIconLarge}
+                                    </div>
+                                </div>
+                                <div class="flex-grow"></div>
+                                <div class="mt-4 text-right text-amee-red font-bold text-sm flex items-center justify-end group-hover:text-amee-blue transition-colors">
+                                    <span>查看 ${theme.courses.length} 堂課程</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            homepageHTML += `</div>`;
+            
+            const summaryTheme = themes['summary'];
+            const summaryIconLarge = summaryTheme.icon.replace('h-5 w-5 mr-3 text-amee-red', 'h-8 w-8 text-white');
+            homepageHTML += `
+                <div data-nav-id="summary" 
+                     class="theme-card bg-amee-blue mt-8 p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col justify-between overflow-hidden relative"
+                     style="background-image: linear-gradient(45deg, #003F87 0%, #002c60 100%);">
+                     
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">${summaryTheme.title}</h4>
+                                <p class="text-sm text-gray-300 font-medium">${summaryTheme.keywords}</p>
+                            </div>
+                            <div class="w-12 h-12 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full shadow-md">
+                                ${summaryIconLarge}
+                            </div>
+                        </div>
+                        <div class="flex-grow"></div>
+                        <div class="mt-4 text-right text-white font-bold text-sm flex items-center justify-end group-hover:text-yellow-300 transition-colors">
+                            <span>查看詳細計畫</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </div>
                     </div>
-                `;
-            });
-            themeHtml += '</div>';
-            contentDisplay.innerHTML = themeHtml;
+                </div>
+            `;
+
+
+            contentDisplay.innerHTML = homepageHTML;
             contentDisplay.style.display = 'block';
             document.getElementById('summary-section').style.display = 'none';
         }
@@ -334,7 +410,7 @@
             theme.courses.forEach(courseId => {
                 const course = courseData[courseId];
                 courseListHtml += `
-                     <div data-course-id="${courseId}" class="summary-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                     <div data-course-id="${courseId}" class="summary-card bg-white p-6 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transform transition-all duration-300 cursor-pointer flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center mb-4">
                                 <span class="bg-amee-red text-white text-sm font-bold mr-3 px-3 py-1 rounded-full">${courseId}</span>
@@ -342,8 +418,9 @@
                             </div>
                             <h4 class="text-lg font-bold text-gray-900 leading-tight" style="min-height: 5rem;">${course.title}</h4>
                         </div>
-                        <div class="mt-4 text-right text-amee-blue font-bold text-sm">
-                            查看詳情 &rarr;
+                        <div class="mt-4 text-right text-amee-red font-bold text-sm flex items-center justify-end group-hover:text-amee-blue transition-colors">
+                            <span>查看詳情</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </div>
                     </div>
                 `;
@@ -395,28 +472,27 @@
             contentDisplay.style.display = 'none';
             document.getElementById('summary-section').style.display = 'block';
             
-            // Wait a tick for the canvas to be in the DOM
             setTimeout(initRadarChart, 0);
         }
 
         function populateNavigation() {
             navigationContainer.innerHTML = ''; // Clear existing
             
-            // Home button
             const homeLi = document.createElement('li');
             homeLi.innerHTML = `<button data-nav-id="home" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg><span class="text-left flex-1 font-semibold">首頁總覽</span></button>`;
             navigationContainer.appendChild(homeLi);
 
-            // Theme buttons
             Object.entries(themes).forEach(([themeId, theme]) => {
-                const li = document.createElement('li');
-                li.innerHTML = `<button data-nav-id="${themeId}" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg><span class="text-left flex-1">${theme.title}</span></button>`;
-                navigationContainer.appendChild(li);
+                if (themeId !== 'summary') {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<button data-nav-id="${themeId}" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">${theme.sidebar_icon}<span class="text-left flex-1">${theme.title}</span></button>`;
+                    navigationContainer.appendChild(li);
+                }
             });
 
-            // Summary button
             const summaryLi = document.createElement('li');
-            summaryLi.innerHTML = `<button data-nav-id="summary" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-amee-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg><span class="text-left flex-1 font-semibold">總結與應用</span></button>`;
+            const summaryTheme = themes['summary'];
+            summaryLi.innerHTML = `<button data-nav-id="summary" class="sidebar-btn w-full flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors duration-200">${summaryTheme.sidebar_icon}<span class="text-left flex-1 font-semibold">${summaryTheme.title}</span></button>`;
             navigationContainer.appendChild(summaryLi);
         }
 
@@ -445,7 +521,6 @@
 
             if(courseCard) {
                 const courseId = courseCard.dataset.courseId;
-                // Find which theme this course belongs to for setting active button
                 for(const themeId in themes) {
                     if (themes[themeId].courses.includes(courseId)) {
                         setActiveButton(themeId);
@@ -454,9 +529,13 @@
                 }
                 displayCourse(courseId);
             } else if (themeCard) {
-                const themeId = themeCard.dataset.navId;
-                displayThemePage(themeId);
-                setActiveButton(themeId);
+                const navId = themeCard.dataset.navId;
+                 if (navId === 'summary') {
+                    displaySummary();
+                } else {
+                    displayThemePage(navId);
+                }
+                setActiveButton(navId);
             }
         });
         
